@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Playbook — Excel AI</title>
+<title>Demo Playbook: Excel AI</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #1a1a1a; line-height: 1.7; background: #fff; padding: 40px 24px 80px; max-width: 720px; margin: 0 auto; }
@@ -110,7 +110,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="q-block">
       <div class="q-label">Question 1</div>
       <div class="q-text">What does your team spend the most time doing manually in spreadsheets when dealing with text data like survey responses?</div>
-      <div class="q-why">Opens the door without leading. Let them name their pain — don't guess it for them.</div>
+      <div class="q-why">Opens the door without leading. Let them name their pain. Don't guess it for them.</div>
     </div>
 
     <div class="q-block">
@@ -133,7 +133,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="q-block">
       <div class="q-label">Question 5</div>
-      <div class="q-text">Who would actually use this day-to-day — analysts, ops people, managers? How technical are they?</div>
+      <div class="q-text">Who would actually use this day-to-day? Analysts, ops people, managers? How technical are they?</div>
       <div class="q-why">Tells you whether to emphasize "no code required" or "configurable models." Shapes your demo language.</div>
     </div>
 
@@ -156,12 +156,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="q-block">
       <div class="q-label">Say this</div>
       <div class="q-text">"You told us your team spends lots of time manually [doing X]. Let me show you what that looks like with one formula…"</div>
-      <div class="q-why">Restate their exact words from discovery. This isn't a feature tour — it's a mirror.</div>
+      <div class="q-why">Restate their exact words from discovery. This isn't a feature tour. It's a mirror.</div>
     </div>
 
     <div class="q-block">
       <div class="q-label">Then ask</div>
-      <div class="q-text">"Before I show you — if this could reliably do [their task] on 1,000 rows in the time it takes to get coffee, what would that free your team up to do instead?"</div>
+      <div class="q-text">"If this could handle [their task] on 1,000 rows while you grab coffee, what does your team do with that time back?"</div>
       <div class="q-why">Forces them to visualize the outcome before they see the product. Now they're emotionally invested.</div>
     </div>
 
@@ -193,83 +193,83 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     </div>
 
     <div class="detail-panel" id="detail-sentiment">
-      <div class="detail-title">Sentiment analysis — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Type <code>=AI("Classify sentiment as Positive, Negative, or Neutral. Reply with only one word.", A5)</code> in B5 next to a real review. Let the cell populate live.</div></div>
+      <div class="detail-title">Sentiment analysis: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Type <code>=EXCEL.AI("Classify sentiment as Positive, Negative, or Neutral. Reply with only one word.", A5)</code> in B5 next to a real review. Let the cell populate live.</div></div>
       <div class="detail-section"><div class="detail-label">Then drag down</div><div class="detail-text">Select B5, drag down 12 rows. Pause. Let the silence do the selling while cells fill in.</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How long would this take your team to do manually for a batch of 5,000 survey responses?"</div></div>
-      <div class="detail-section"><div class="detail-label">Twist the knife</div><div class="detail-text">"Now watch — I'll change the prompt to also extract the top complaint keyword." Edit the prompt, drag again. Same data, richer output, zero extra setup.</div></div>
+      <div class="detail-section"><div class="detail-label">Twist the knife</div><div class="detail-text">"Now watch. I'll change the prompt to also extract the top complaint keyword." Edit the prompt, drag again. Same data, richer output, zero extra setup.</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Market research firms, CX teams, survey platforms, product teams reading NPS verbatims.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-extraction">
-      <div class="detail-title">Data extraction — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Use a messy email-like text in A5. Type <code>=AI("Extract the company name only", A5)</code> in B5. Then in C5: <code>=AI("Extract the dollar amount only", A5)</code>.</div></div>
-      <div class="detail-section"><div class="detail-label">The aha moment</div><div class="detail-text">Add a 4th column: "Extract the date and convert to YYYY-MM-DD format." This shows the AI handles formatting too — it's not just extraction, it's transformation.</div></div>
+      <div class="detail-title">Data extraction: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Use a messy email-like text in A5. Type <code>=EXCEL.AI("Extract the company name only", A5)</code> in B5. Then in C5: <code>=EXCEL.AI("Extract the dollar amount only", A5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">The aha moment</div><div class="detail-text">Add a 4th column: "Extract the date and convert to YYYY-MM-DD format." This shows the AI handles formatting too. It's not just extraction, it's transformation.</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How much of your team's time goes into parsing emails, invoices, or notes into structured data?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Finance teams, legal ops, procurement, anyone drowning in unstructured documents.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-categorization">
-      <div class="detail-title">Categorization — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the expense list. Type <code>=AI("Categorize this expense into one of: Travel, Software, Office, Meals, Marketing. Reply with one word.", A5)</code>.</div></div>
+      <div class="detail-title">Categorization: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the expense list. Type <code>=EXCEL.AI("Categorize this expense into one of: Travel, Software, Office, Meals, Marketing. Reply with one word.", A5)</code>.</div></div>
       <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">Add a second column: "Is this tax deductible for a US-based LLC? Yes or No." Two columns, one drag, two answers per row.</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What categories does your team use? Could you swap these labels for yours and run this on your own data today?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Finance, accounting, ops teams who manually tag transactions, support tickets, or log entries.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-cleaning">
-      <div class="detail-title">Data cleaning — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the messy inputs column. Type <code>=AI("Clean and normalize this into a standard format", A5)</code>. Watch "john.doe AT gmail DOT com" become a proper email.</div></div>
+      <div class="detail-title">Data cleaning: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the messy inputs column. Type <code>=EXCEL.AI("Clean and normalize this into a standard format", A5)</code>. Watch "john.doe AT gmail DOT com" become a proper email.</div></div>
       <div class="detail-section"><div class="detail-label">The hook</div><div class="detail-text">"This would normally take a regex wizard an hour to handle all the edge cases. The AI just reads the intent."</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What's the messiest dataset your team deals with regularly? CRM imports? Vendor lists?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Data teams, anyone doing CRM migrations, analytics prep, or merging datasets from multiple sources.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-summarization">
-      <div class="detail-title">Summarization — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Paste long meeting notes in A5. In B5: <code>=AI("Summarize in one sentence", A5)</code>. In C5: <code>=AI("Extract action items as a comma-separated list", A5)</code>.</div></div>
+      <div class="detail-title">Summarization: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Paste long meeting notes in A5. In B5: <code>=EXCEL.AI("Summarize in one sentence", A5)</code>. In C5: <code>=EXCEL.AI("Extract action items as a comma-separated list", A5)</code>.</div></div>
       <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">"Now imagine this column has 200 meeting transcripts from last quarter. Your team gets a dashboard of every decision and action item in minutes."</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How does your team currently track decisions and follow-ups from meetings?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Consulting firms, project management, executive teams, anyone with call transcripts piling up.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-translation">
-      <div class="detail-title">Translation — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product description in A5. B5: <code>=AI("Translate to Spanish", A5)</code>. C5: French. D5: German. Drag all three columns down simultaneously.</div></div>
+      <div class="detail-title">Translation: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product description in A5. B5: <code>=EXCEL.AI("Translate to Spanish", A5)</code>. C5: French. D5: German. Drag all three columns down simultaneously.</div></div>
       <div class="detail-section"><div class="detail-label">The visual punch</div><div class="detail-text">Seeing 8 products × 3 languages fill in at once is viscerally impressive. Let it run in silence.</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What's your current localization workflow? How much do you spend per language on translation services?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">E-commerce, SaaS with international users, marketing teams managing multi-language content.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-email">
-      <div class="detail-title">Email drafts — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show name + company + notes in columns A–C. In D5: <code>=AI("Write a short, warm sales follow-up email using the contact name, company, and context.", A5:C5)</code>.</div></div>
-      <div class="detail-section"><div class="detail-label">The hook</div><div class="detail-text">Each email is different because each row's context is different. Point this out: "It's not a mail merge — each one is genuinely personalized."</div></div>
+      <div class="detail-title">Email drafts: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show name + company + notes in columns A–C. In D5: <code>=EXCEL.AI("Write a short, warm sales follow-up email using the contact name, company, and context.", A5:C5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">The hook</div><div class="detail-text">Each email is different because each row's context is different. Point this out: "It's not a mail merge. Each one is genuinely personalized."</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many outbound emails does your team send per week? How much time goes into personalizing each one?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Sales teams, SDRs, account managers, recruiting teams doing outbound.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-resume">
-      <div class="detail-title">Resume screening — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Candidate summary + role in A–B. In C5: <code>=AI("Score this candidate 1-10 for the role. Reply with only a number.", A5:B5)</code>. Then D5 for strengths, E5 for concerns.</div></div>
+      <div class="detail-title">Resume screening: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Candidate summary + role in A–B. In C5: <code>=EXCEL.AI("Score this candidate 1-10 for the role. Reply with only a number.", A5:B5)</code>. Then D5 for strengths, E5 for concerns.</div></div>
       <div class="detail-section"><div class="detail-label">Key nuance</div><div class="detail-text">Emphasize this is a first-pass filter, not a decision maker. The AI handles volume so humans can focus on the top 20%.</div></div>
-      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many applications do you review per open role? What's the bottleneck — volume or consistency?"</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many applications do you review per open role? What's the bottleneck? Volume or consistency?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">HR teams, recruiting agencies, high-volume hiring orgs.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-productcopy">
-      <div class="detail-title">Product copy — demo script</div>
-      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product name + specs in A–B. In C5: <code>=AI("Write a 2-sentence marketing description", A5:B5)</code>. In D5: <code>=AI("Generate 5 SEO keywords, comma-separated", A5:B5)</code>.</div></div>
+      <div class="detail-title">Product copy: demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product name + specs in A–B. In C5: <code>=EXCEL.AI("Write a 2-sentence marketing description", A5:B5)</code>. In D5: <code>=EXCEL.AI("Generate 5 SEO keywords, comma-separated", A5:B5)</code>.</div></div>
       <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">"Now imagine you have 500 SKUs launching next quarter. Each one needs copy and keywords. This is done before lunch."</div></div>
       <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many new products or SKUs do you launch per month? Who writes the copy today?"</div></div>
       <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">E-commerce, retail, CPG brands, marketplace sellers managing large catalogs.</div></div>
     </div>
 
     <div class="detail-panel" id="detail-formula">
-      <div class="detail-title">Formula helper — demo script</div>
+      <div class="detail-title">Formula helper: demo script</div>
       <div class="detail-section"><div class="detail-label">When to show</div><div class="detail-text">Use this as a crowd-pleaser at the end, not a lead use case. It shows breadth but doesn't show the core value prop (bulk text processing).</div></div>
-      <div class="detail-section"><div class="detail-label">Show</div><div class="detail-text">Type <code>=AI("Write an Excel formula: look up the price from column B where column A matches D1")</code>. The AI returns a working VLOOKUP or XLOOKUP.</div></div>
-      <div class="detail-section"><div class="detail-label">Positioning</div><div class="detail-text">"This is the Swiss Army knife angle — even when you're not processing text data, the AI function is useful for everyday Excel tasks."</div></div>
+      <div class="detail-section"><div class="detail-label">Show</div><div class="detail-text">Type <code>=EXCEL.AI("Write an Excel formula: look up the price from column B where column A matches D1")</code>. The AI returns a working VLOOKUP or XLOOKUP.</div></div>
+      <div class="detail-section"><div class="detail-label">Positioning</div><div class="detail-text">"This is the Swiss Army knife angle. Even when you're not processing text data, the AI function is useful for everyday Excel tasks."</div></div>
     </div>
 
     <div class="tip" style="margin-top: 12px;">
@@ -285,18 +285,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
     <div class="phase-title">The "hand them the keyboard" moment (5 min)</div>
     <span class="chevron open" id="chev-p4">&#9654;</span>
   </div>
-  <div class="phase-subtitle">Goal: get them to use the product during the call — this is where pull happens</div>
+  <div class="phase-subtitle">Goal: get them to use the product during the call. This is where pull happens</div>
   <div class="phase-body" id="body-p4">
 
     <div class="q-block">
       <div class="q-label">Say this</div>
-      <div class="q-text">"What's something your team does every week that you wish was automated? Type the prompt — anything. Let's see if it works right now."</div>
+      <div class="q-text">"What's something your team does every week that you wish was automated? Type the prompt. Anything. Let's see if it works right now."</div>
       <div class="q-why">The moment they write their own prompt and see it work, the sale shifts from "show me" to "how do I get this?"</div>
     </div>
 
     <div class="q-block">
       <div class="q-label">If they hesitate</div>
-      <div class="q-text">"How about this — give me the messiest column of data in any spreadsheet you have open right now. Let's clean it."</div>
+      <div class="q-text">"Give me the messiest column in any spreadsheet you have open. Let's clean it."</div>
       <div class="q-why">Lowers the barrier. Everyone has messy data. It's universally relatable.</div>
     </div>
 
@@ -328,14 +328,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
     <div class="q-block">
       <div class="q-label">Objection 2: "How accurate is it?"</div>
-      <div class="q-text">"You saw the results live. And because it's a formula, you can audit every output — it's right there in the cell, not hidden in some pipeline. Your team reviews it the same way they'd review any spreadsheet."</div>
+      <div class="q-text">"You saw the results live. And because it's a formula, you can audit every output. It's right there in the cell, not hidden in some pipeline. Your team reviews it the same way they'd review any spreadsheet."</div>
       <div class="q-why">The transparency angle: it's not a black box. Every output is visible and auditable in the cell.</div>
     </div>
 
     <div class="q-block">
       <div class="q-label">Closing question</div>
       <div class="q-text">"What would you need to see to run a pilot with your team next week?"</div>
-      <div class="q-why">Doesn't ask "are you interested?" — that's a yes/no gate. Instead asks "what's left?" which assumes the sale and surfaces the real blockers (IT approval, budget, etc.).</div>
+      <div class="q-why">Doesn't ask "are you interested?" That's a yes/no gate. Instead asks "what's left?" which assumes the sale and surfaces the real blockers (IT approval, budget, etc.).</div>
     </div>
 
     <div class="q-block">
