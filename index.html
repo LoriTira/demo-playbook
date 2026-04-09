@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Playbook — Excel AI</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #1a1a1a; line-height: 1.7; background: #fff; padding: 40px 24px 80px; max-width: 720px; margin: 0 auto; }
+
+/* Title */
+.page-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+.page-subtitle { font-size: 14px; color: #999; margin-bottom: 24px; }
+
+/* Nav pills */
+.nav-pills { display: flex; gap: 6px; margin-bottom: 32px; flex-wrap: wrap; }
+.nav-pill { font-size: 13px; padding: 5px 14px; border-radius: 20px; border: none; background: #f5f5f5; cursor: pointer; color: #666; font-family: inherit; transition: all 0.15s; }
+.nav-pill:hover { background: #eee; color: #333; }
+.nav-pill.active { background: #1a1a1a; color: #fff; }
+
+/* Phase sections */
+.phase { margin-bottom: 36px; padding-top: 20px; border-top: 1px solid #eee; }
+.phase:first-of-type { border-top: none; padding-top: 0; }
+.phase-header { display: flex; align-items: baseline; gap: 10px; cursor: pointer; user-select: none; margin-bottom: 4px; }
+.phase-num { font-size: 13px; font-weight: 600; color: #999; min-width: 20px; }
+.phase-title { font-size: 17px; font-weight: 600; color: #1a1a1a; }
+.chevron { font-size: 10px; color: #ccc; margin-left: auto; transition: transform 0.2s; }
+.chevron.open { transform: rotate(90deg); }
+.phase-subtitle { font-size: 13px; color: #999; margin-left: 30px; margin-bottom: 16px; }
+
+/* Content area */
+.phase-body { margin-left: 30px; }
+
+/* Question blocks */
+.q-block { padding: 12px 0; border-bottom: 1px solid #f5f5f5; }
+.q-block:last-child { border-bottom: none; }
+.q-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #999; margin-bottom: 3px; }
+.q-text { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+.q-why { font-size: 13px; color: #888; margin-top: 3px; }
+.q-follow { font-size: 13px; color: #888; margin-top: 2px; font-style: italic; }
+
+/* Tips */
+.tip { font-size: 13px; color: #666; padding: 10px 14px; border-left: 2px solid #ddd; margin: 14px 0; background: #fafafa; border-radius: 0 4px 4px 0; }
+.tip strong { color: #1a1a1a; }
+
+/* Use case pills */
+.uc-pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+.uc-pill { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1px solid #e0e0e0; background: transparent; cursor: pointer; color: #555; font-family: inherit; transition: all 0.15s; }
+.uc-pill:hover { border-color: #bbb; color: #333; }
+.uc-pill.selected { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+
+/* Detail panel */
+.detail-panel { display: none; padding-top: 12px; border-top: 1px solid #eee; margin-top: 4px; }
+.detail-panel.visible { display: block; }
+.detail-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+.detail-section { padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+.detail-section:last-child { border-bottom: none; }
+.detail-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; color: #999; margin-bottom: 2px; }
+.detail-text { font-size: 14px; color: #333; }
+.detail-text code { background: #f5f5f5; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body { background: #111; color: #e0e0e0; }
+  .page-title { color: #f0f0f0; }
+  .page-subtitle { color: #666; }
+  .nav-pill { background: #222; color: #888; }
+  .nav-pill:hover { background: #2a2a2a; color: #bbb; }
+  .nav-pill.active { background: #e0e0e0; color: #111; }
+  .phase { border-top-color: #222; }
+  .phase-title { color: #f0f0f0; }
+  .q-block { border-bottom-color: #1a1a1a; }
+  .q-text { color: #e0e0e0; }
+  .q-why, .q-follow { color: #666; }
+  .tip { background: #1a1a1a; border-left-color: #333; color: #888; }
+  .tip strong { color: #e0e0e0; }
+  .uc-pill { border-color: #333; color: #888; }
+  .uc-pill:hover { border-color: #555; color: #bbb; }
+  .uc-pill.selected { background: #e0e0e0; color: #111; border-color: #e0e0e0; }
+  .detail-panel { border-top-color: #222; }
+  .detail-title { color: #f0f0f0; }
+  .detail-section { border-bottom-color: #1a1a1a; }
+  .detail-text { color: #ccc; }
+  .detail-text code { background: #1a1a1a; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">Demo Playbook</div>
+<div class="page-subtitle">Excel AI · Sales team reference</div>
+
+<div class="nav-pills">
+  <button class="nav-pill active" onclick="showAll()">Full playbook</button>
+  <button class="nav-pill" onclick="showPhase('pre')">Pre-demo only</button>
+  <button class="nav-pill" onclick="showPhase('during')">During demo only</button>
+  <button class="nav-pill" onclick="showPhase('close')">Close only</button>
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase" data-group="pre">
+  <div class="phase-header" onclick="toggle('p1')">
+    <div class="phase-num">01</div>
+    <div class="phase-title">Qualify the pain (pre-call email or intake form)</div>
+    <span class="chevron open" id="chev-p1">&#9654;</span>
+  </div>
+  <div class="phase-subtitle">Goal: arrive at the demo already knowing which 2–3 use cases will land hardest</div>
+  <div class="phase-body" id="body-p1">
+
+    <div class="q-block">
+      <div class="q-label">Question 1</div>
+      <div class="q-text">What does your team spend the most time doing manually in spreadsheets today?</div>
+      <div class="q-why">Opens the door without leading. Let them name their pain — don't guess it for them.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Question 2</div>
+      <div class="q-text">How many rows of text data do you typically process in a batch? Hundreds? Thousands? Tens of thousands?</div>
+      <div class="q-why">Establishes scale. If it's 50 rows, the pain is mild. If it's 10K+, you're solving a real time problem.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Question 3</div>
+      <div class="q-text">Have you tried using ChatGPT or another AI tool for this? What broke down?</div>
+      <div class="q-why">Surfaces their objections early: copy-paste fatigue, inconsistent outputs, data privacy fears. You address these in the demo.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Question 4</div>
+      <div class="q-text">How sensitive is the data you'd run through this? Would it need to stay on-premises?</div>
+      <div class="q-why">If yes → the local LM Studio angle becomes the headline feature. If no → you can focus on speed and ease.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Question 5</div>
+      <div class="q-text">Who would actually use this day-to-day — analysts, ops people, managers? How technical are they?</div>
+      <div class="q-why">Tells you whether to emphasize "no code required" or "configurable models." Shapes your demo language.</div>
+    </div>
+
+    <div class="tip">
+      <strong>Ask them to send a sample.</strong> The single highest-leverage pre-demo move: "Can you send us 10–20 rows of real (or anonymized) data you'd want to process?" Then you build the demo around their actual data.
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase" data-group="during">
+  <div class="phase-header" onclick="toggle('p2')">
+    <div class="phase-num">02</div>
+    <div class="phase-title">Open the demo: mirror their pain back (2 min)</div>
+    <span class="chevron open" id="chev-p2">&#9654;</span>
+  </div>
+  <div class="phase-subtitle">Goal: make them feel heard, then set up the "what if" moment</div>
+  <div class="phase-body" id="body-p2">
+
+    <div class="q-block">
+      <div class="q-label">Say this</div>
+      <div class="q-text">"You told us your team spends [X hours/week] manually [doing Y]. Let me show you what that looks like with one formula."</div>
+      <div class="q-why">Restate their exact words from discovery. This isn't a feature tour — it's a mirror.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Then ask</div>
+      <div class="q-text">"Before I show you — if this could reliably do [their task] on 1,000 rows in the time it takes to get coffee, what would that free your team up to do instead?"</div>
+      <div class="q-why">Forces them to visualize the outcome before they see the product. Now they're emotionally invested.</div>
+    </div>
+
+    <div class="tip">Don't open Excel yet. Spend 2 minutes in conversation. The demo hasn't started until they've articulated what "good" looks like.</div>
+  </div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase" data-group="during">
+  <div class="phase-header" onclick="toggle('p3')">
+    <div class="phase-num">03</div>
+    <div class="phase-title">The live demo: 3 use cases, escalating complexity (15 min)</div>
+    <span class="chevron open" id="chev-p3">&#9654;</span>
+  </div>
+  <div class="phase-subtitle">Pick the 3 that match their pain. Click a use case below to see the demo script.</div>
+  <div class="phase-body" id="body-p3">
+
+    <div class="uc-pills">
+      <button class="uc-pill" onclick="selectUC(this, 'sentiment')">Sentiment analysis</button>
+      <button class="uc-pill" onclick="selectUC(this, 'extraction')">Data extraction</button>
+      <button class="uc-pill" onclick="selectUC(this, 'categorization')">Categorization</button>
+      <button class="uc-pill" onclick="selectUC(this, 'cleaning')">Data cleaning</button>
+      <button class="uc-pill" onclick="selectUC(this, 'summarization')">Summarization</button>
+      <button class="uc-pill" onclick="selectUC(this, 'translation')">Translation</button>
+      <button class="uc-pill" onclick="selectUC(this, 'email')">Email drafts</button>
+      <button class="uc-pill" onclick="selectUC(this, 'resume')">Resume screening</button>
+      <button class="uc-pill" onclick="selectUC(this, 'productcopy')">Product copy</button>
+      <button class="uc-pill" onclick="selectUC(this, 'formula')">Formula helper</button>
+    </div>
+
+    <div class="detail-panel" id="detail-sentiment">
+      <div class="detail-title">Sentiment analysis — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Type <code>=AI("Classify sentiment as Positive, Negative, or Neutral. Reply with only one word.", A5)</code> in B5 next to a real review. Let the cell populate live.</div></div>
+      <div class="detail-section"><div class="detail-label">Then drag down</div><div class="detail-text">Select B5, drag down 12 rows. Pause. Let the silence do the selling while cells fill in.</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How long would this take your team to do manually for a batch of 5,000 survey responses?"</div></div>
+      <div class="detail-section"><div class="detail-label">Twist the knife</div><div class="detail-text">"Now watch — I'll change the prompt to also extract the top complaint keyword." Edit the prompt, drag again. Same data, richer output, zero extra setup.</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Market research firms, CX teams, survey platforms, product teams reading NPS verbatims.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-extraction">
+      <div class="detail-title">Data extraction — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Use a messy email-like text in A5. Type <code>=AI("Extract the company name only", A5)</code> in B5. Then in C5: <code>=AI("Extract the dollar amount only", A5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">The aha moment</div><div class="detail-text">Add a 4th column: "Extract the date and convert to YYYY-MM-DD format." This shows the AI handles formatting too — it's not just extraction, it's transformation.</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How much of your team's time goes into parsing emails, invoices, or notes into structured data?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Finance teams, legal ops, procurement, anyone drowning in unstructured documents.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-categorization">
+      <div class="detail-title">Categorization — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the expense list. Type <code>=AI("Categorize this expense into one of: Travel, Software, Office, Meals, Marketing. Reply with one word.", A5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">Add a second column: "Is this tax deductible for a US-based LLC? Yes or No." Two columns, one drag, two answers per row.</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What categories does your team use? Could you swap these labels for yours and run this on your own data today?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Finance, accounting, ops teams who manually tag transactions, support tickets, or log entries.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-cleaning">
+      <div class="detail-title">Data cleaning — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show the messy inputs column. Type <code>=AI("Clean and normalize this into a standard format", A5)</code>. Watch "john.doe AT gmail DOT com" become a proper email.</div></div>
+      <div class="detail-section"><div class="detail-label">The hook</div><div class="detail-text">"This would normally take a regex wizard an hour to handle all the edge cases. The AI just reads the intent."</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What's the messiest dataset your team deals with regularly? CRM imports? Vendor lists?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Data teams, anyone doing CRM migrations, analytics prep, or merging datasets from multiple sources.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-summarization">
+      <div class="detail-title">Summarization — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Paste long meeting notes in A5. In B5: <code>=AI("Summarize in one sentence", A5)</code>. In C5: <code>=AI("Extract action items as a comma-separated list", A5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">"Now imagine this column has 200 meeting transcripts from last quarter. Your team gets a dashboard of every decision and action item in minutes."</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How does your team currently track decisions and follow-ups from meetings?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Consulting firms, project management, executive teams, anyone with call transcripts piling up.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-translation">
+      <div class="detail-title">Translation — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product description in A5. B5: <code>=AI("Translate to Spanish", A5)</code>. C5: French. D5: German. Drag all three columns down simultaneously.</div></div>
+      <div class="detail-section"><div class="detail-label">The visual punch</div><div class="detail-text">Seeing 8 products × 3 languages fill in at once is viscerally impressive. Let it run in silence.</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"What's your current localization workflow? How much do you spend per language on translation services?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">E-commerce, SaaS with international users, marketing teams managing multi-language content.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-email">
+      <div class="detail-title">Email drafts — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Show name + company + notes in columns A–C. In D5: <code>=AI("Write a short, warm sales follow-up email using the contact name, company, and context.", A5:C5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">The hook</div><div class="detail-text">Each email is different because each row's context is different. Point this out: "It's not a mail merge — each one is genuinely personalized."</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many outbound emails does your team send per week? How much time goes into personalizing each one?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">Sales teams, SDRs, account managers, recruiting teams doing outbound.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-resume">
+      <div class="detail-title">Resume screening — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Candidate summary + role in A–B. In C5: <code>=AI("Score this candidate 1-10 for the role. Reply with only a number.", A5:B5)</code>. Then D5 for strengths, E5 for concerns.</div></div>
+      <div class="detail-section"><div class="detail-label">Key nuance</div><div class="detail-text">Emphasize this is a first-pass filter, not a decision maker. The AI handles volume so humans can focus on the top 20%.</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many applications do you review per open role? What's the bottleneck — volume or consistency?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">HR teams, recruiting agencies, high-volume hiring orgs.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-productcopy">
+      <div class="detail-title">Product copy — demo script</div>
+      <div class="detail-section"><div class="detail-label">Show first</div><div class="detail-text">Product name + specs in A–B. In C5: <code>=AI("Write a 2-sentence marketing description", A5:B5)</code>. In D5: <code>=AI("Generate 5 SEO keywords, comma-separated", A5:B5)</code>.</div></div>
+      <div class="detail-section"><div class="detail-label">Escalate</div><div class="detail-text">"Now imagine you have 500 SKUs launching next quarter. Each one needs copy and keywords. This is done before lunch."</div></div>
+      <div class="detail-section"><div class="detail-label">Ask during</div><div class="detail-text">"How many new products or SKUs do you launch per month? Who writes the copy today?"</div></div>
+      <div class="detail-section"><div class="detail-label">Best for</div><div class="detail-text">E-commerce, retail, CPG brands, marketplace sellers managing large catalogs.</div></div>
+    </div>
+
+    <div class="detail-panel" id="detail-formula">
+      <div class="detail-title">Formula helper — demo script</div>
+      <div class="detail-section"><div class="detail-label">When to show</div><div class="detail-text">Use this as a crowd-pleaser at the end, not a lead use case. It shows breadth but doesn't show the core value prop (bulk text processing).</div></div>
+      <div class="detail-section"><div class="detail-label">Show</div><div class="detail-text">Type <code>=AI("Write an Excel formula: look up the price from column B where column A matches D1")</code>. The AI returns a working VLOOKUP or XLOOKUP.</div></div>
+      <div class="detail-section"><div class="detail-label">Positioning</div><div class="detail-text">"This is the Swiss Army knife angle — even when you're not processing text data, the AI function is useful for everyday Excel tasks."</div></div>
+    </div>
+
+    <div class="tip" style="margin-top: 12px;">
+      <strong>The 3-use-case arc:</strong> Start with their #1 pain (usually sentiment or extraction). Then show a related use case they didn't think of. Then finish with something unexpected that widens the aperture. The progression should feel like: "Oh it solves my problem" → "Oh it solves problems I didn't even think to ask about" → "Wait, what else can this do?"
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase" data-group="during">
+  <div class="phase-header" onclick="toggle('p4')">
+    <div class="phase-num">04</div>
+    <div class="phase-title">The "hand them the keyboard" moment (5 min)</div>
+    <span class="chevron open" id="chev-p4">&#9654;</span>
+  </div>
+  <div class="phase-subtitle">Goal: get them to use the product during the call — this is where pull happens</div>
+  <div class="phase-body" id="body-p4">
+
+    <div class="q-block">
+      <div class="q-label">Say this</div>
+      <div class="q-text">"What's something your team does every week that you wish was automated? Type the prompt — anything. Let's see if it works right now."</div>
+      <div class="q-why">The moment they write their own prompt and see it work, the sale shifts from "show me" to "how do I get this?"</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">If they hesitate</div>
+      <div class="q-text">"How about this — give me the messiest column of data in any spreadsheet you have open right now. Let's clean it."</div>
+      <div class="q-why">Lowers the barrier. Everyone has messy data. It's universally relatable.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">After it works, ask</div>
+      <div class="q-text">"How many people on your team would use this if it were installed on their machines tomorrow?"</div>
+      <div class="q-why">This is a buying signal question disguised as curiosity. Their answer tells you deal size and urgency.</div>
+    </div>
+
+    <div class="tip"><strong>This is the most important phase.</strong> A customer who has typed their own prompt and seen it work on their own mental model of a problem will sell the product internally for you. They become the champion.</div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="phase" data-group="close">
+  <div class="phase-header" onclick="toggle('p5')">
+    <div class="phase-num">05</div>
+    <div class="phase-title">Close: anchor on the privacy story and next steps (3 min)</div>
+    <span class="chevron open" id="chev-p5">&#9654;</span>
+  </div>
+  <div class="phase-subtitle">Goal: handle the two biggest objections before they come up, then get a commitment</div>
+  <div class="phase-body" id="body-p5">
+
+    <div class="q-block">
+      <div class="q-label">Objection 1: "Is our data safe?"</div>
+      <div class="q-text">"Everything runs locally through LM Studio on your machine. No data leaves your network. No API calls to OpenAI. No cloud. Your IT team can audit the entire data flow."</div>
+      <div class="q-why">This is your unfair advantage over ChatGPT-based competitors. Lead with it, don't wait for them to ask.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Objection 2: "How accurate is it?"</div>
+      <div class="q-text">"You saw the results live. And because it's a formula, you can audit every output — it's right there in the cell, not hidden in some pipeline. Your team reviews it the same way they'd review any spreadsheet."</div>
+      <div class="q-why">The transparency angle: it's not a black box. Every output is visible and auditable in the cell.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Closing question</div>
+      <div class="q-text">"What would you need to see to run a pilot with your team next week?"</div>
+      <div class="q-why">Doesn't ask "are you interested?" — that's a yes/no gate. Instead asks "what's left?" which assumes the sale and surfaces the real blockers (IT approval, budget, etc.).</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Expansion question</div>
+      <div class="q-text">"Beyond your team, which other departments deal with large volumes of text data? Legal? Customer support? Marketing?"</div>
+      <div class="q-why">Plants the seed for a larger deal. If they start listing departments, you've got internal expansion mapped.</div>
+    </div>
+
+    <div class="tip"><strong>Never end the demo on features.</strong> End on their words: "You said your team spends X hours on Y. We just did it in 30 seconds. What's the right next step?"</div>
+  </div>
+</div>
+
+<script>
+function toggle(id) {
+  var body = document.getElementById('body-' + id);
+  var chev = document.getElementById('chev-' + id);
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    chev.classList.add('open');
+  } else {
+    body.style.display = 'none';
+    chev.classList.remove('open');
+  }
+}
+
+function selectUC(el, id) {
+  document.querySelectorAll('.uc-pill').forEach(function(p) { p.classList.remove('selected'); });
+  document.querySelectorAll('.detail-panel').forEach(function(p) { p.classList.remove('visible'); });
+  el.classList.add('selected');
+  var panel = document.getElementById('detail-' + id);
+  if (panel) panel.classList.add('visible');
+}
+
+function showAll() {
+  document.querySelectorAll('.nav-pill').forEach(function(p) { p.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.querySelectorAll('.phase').forEach(function(p) { p.style.display = 'block'; });
+}
+
+function showPhase(group) {
+  document.querySelectorAll('.nav-pill').forEach(function(p) { p.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.querySelectorAll('.phase').forEach(function(p) {
+    p.style.display = p.dataset.group === group ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
